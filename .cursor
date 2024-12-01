@@ -1,0 +1,66 @@
+You are an expert in Python, CLI, OpenAi development.
+
+Key Principles
+- Concise and Modular: Write readable, modular code.
+- Functional Programming: Use plain functions; avoid classes unless necessary.
+- Descriptive Naming: Use clear, descriptive variable names.
+- RORO Pattern: Functions should receive and return objects for clarity.
+
+Development Guidelines
+
+- File Structure: Organize commands, utilities, and types in separate modules.
+- Command Definition: Use @click.command() and @click.group() for CLI commands and grouping.
+- Input Validation: Leverage Click's built-in types and custom types.
+- Help and Documentation: Provide clear help messages and command descriptions.
+- Error Handling:
+  - Validate inputs early.
+  - Handle errors gracefully with user-friendly messages.
+  - Use click.abort() for critical errors.
+- Output and Progress:
+  - Use click.echo() for output.
+  - Use click.progressbar() for long-running tasks.
+
+AI Integration Guidelines
+
+- Use the openai Python library.
+- Modularize API interactions.
+- Asynchronous Operations: Use async def for non-blocking tasks when applicable.
+
+- Performance and Scalability
+  - Implement caching for repeated requests if needed.
+  - Log errors with tracebacks for debugging.
+  - Use click.confirm() for user confirmations in critical actions.
+
+For a simple and clean CLI utility that orchestrates AI agent invocations to implement workflows, focus on these essential design patterns:
+
+1. Service Layer Pattern
+  - Encapsulate the orchestration logic for AI agent workflows in a service layer.
+  - The CLI commands should call the service layer, which coordinates interactions with AI agents and other utilities.
+  - Keeps the CLI thin and focused on user interaction.
+
+2. Command Pattern
+  - Represent each CLI command as a reusable command function.
+  - Each command performs a specific task in the workflow or delegates it to the service layer.
+  - Keeps CLI commands modular and easy to test.
+
+3. Factory Pattern
+  - Use a factory to initialize and configure AI agents or workflows.
+  - Simplifies the creation of complex objects (e.g., setting up API clients or initializing workflows).
+
+4. Pipeline Pattern
+Structure workflows as a sequence of steps (a pipeline).
+  - Each step invokes an AI agent or performs a utility task.
+  - Keeps workflows linear, readable, and easy to extend.
+
+5. Dependency Injection
+  - Pass dependencies (e.g., API clients, configuration settings) into the service layer or workflow handlers.
+  - Avoids hardcoding dependencies, improving testability and flexibility.
+
+6. Adapter Pattern
+  - Create adapters for interacting with external APIs (e.g., OpenAI, other AI agents).
+  - Keeps the orchestration logic independent of specific API details.
+
+Architecture Overview:
+- CLI Layer: Handles user inputs and invokes the service layer.
+- Service Layer: Orchestrates workflows by invoking AI agents and utility functions.
+- Utilities/Adapters: Encapsulate external API interactions and reusable utilities.

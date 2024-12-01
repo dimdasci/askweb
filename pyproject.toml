@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "askweb"
+description = "Command line tool for web search based question answering"
+authors = [
+    {name = "Dmitrii Kharitonov", email = "dimds@fastmail.com"},
+]
+license = {text = "MIT"}
+requires-python = ">=3.12"
+readme = "README.md"
+dynamic = ["version"]
+urls = {Homepage = "https://github.com/dimdasci/askweb"}
+dependencies = [
+    "click",
+    "openai==1.55.3",
+    "duckduckgo_search",
+    "trafilatura",
+    "pydantic",
+    "rich",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+# General settings that apply to all Ruff functionality
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I"]
+ignore = ["COM812", "ISC001"]
+per-file-ignores = { "tests/*" = ["S101", "D100", "D103"] }
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+# Formatting specific configuration
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.flake8]
+max-line-length = 100
+exclude = [".tox", ".git", "*/migrations/*", "*/static/CACHE/*", "docs", "node_modules", "venv"]
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+[project.scripts]
+askweb = "askweb.cli:main"
