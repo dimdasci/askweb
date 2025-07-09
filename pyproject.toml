@@ -16,7 +16,7 @@ urls = {Homepage = "https://github.com/dimdasci/askweb"}
 dependencies = [
     "click",
     "openai==1.55.3",
-    "duckduckgo_search",
+    "ddgs",
     "trafilatura",
     "pydantic",
     "rich",

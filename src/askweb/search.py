@@ -2,7 +2,7 @@ import random
 import time
 from typing import List
 
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 from rich.console import Console
 
 from askweb.models import SearchResult
@@ -29,7 +29,7 @@ class WebSearcher:
                         results.append(
                             SearchResult(
                                 title=result["title"],
-                                url=result["href"],
+                                url=result["href"], # type: ignore
                                 snippet=result["body"],
                             )
                         )
